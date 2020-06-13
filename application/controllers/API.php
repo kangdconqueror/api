@@ -19,6 +19,17 @@ class Api extends REST_Controller{
             $this->response("No record found", 404);
         }
     }
+	
+	//API -  Tampilkan semua data
+    function viewby_get($namatabel, $namafield, $value){
+		$result = $this->m_api->view_by($namatabel, $namafield, $value);
+        if($result){
+			$results = ["sEcho" => 1, "iTotalRecords" => count($result), "iTotalDisplayRecords" => count($result), "data" => $result ];
+            $this->response($results, 200); 
+        }else{
+            $this->response("No record found", 404);
+        }
+    }
 }
 
 /*

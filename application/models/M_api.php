@@ -4,9 +4,18 @@ class M_api extends CI_Model {
         $this->load->database();
       }
       
-      //API call - get a book record by isbn
+      //API 
       public function view($namatabel){
 		$query = $this->db->query("select * from $namatabel");
+           if($query->num_rows()>0){
+               return $query->result_array();
+           }else{
+             return 0;
+           }
+      }
+      //API 
+      public function view_by($namatabel, $namafield, $value){
+		$query = $this->db->query("select * from $namatabel where $namafield='$value'");
            if($query->num_rows()>0){
                return $query->result_array();
            }else{
